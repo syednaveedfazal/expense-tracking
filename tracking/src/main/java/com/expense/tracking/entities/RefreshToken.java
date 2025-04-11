@@ -15,7 +15,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @Data
 @Builder
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @Table(name = "tokens")
 public class RefreshToken {
 
@@ -30,4 +29,5 @@ public class RefreshToken {
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "user_id")
     private UserInfo userInfo;
+
 }

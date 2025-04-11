@@ -11,50 +11,57 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Service
+
 public class CustomUserDetails extends UserInfo implements UserDetails {
 
-    private String userName;
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final String userName;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(UserInfo userInfo) {
-        this.userName = userInfo.getName();
+        this.userName = userInfo.getUserName();
         this.password = userInfo.getPassword();
+
         Collection<GrantedAuthority> auths = new ArrayList<>();
         for (UserRole role : userInfo.getRoles()) {
-            auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
+            auths.add(new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()));
         }
         this.authorities = auths;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.authorities;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return true;
     }
 }
+
