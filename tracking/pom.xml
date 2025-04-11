@@ -52,6 +52,17 @@
             <artifactId>jjwt</artifactId>
             <version>0.12.6</version>
         </dependency>
+        <!-- Mail support -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <!-- Thymeleaf for email templates -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.mysql</groupId>
